@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Alisha</title>
+
+<style>
+/* Base layout setup */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #000000; 
+    color: #333333;
+    overflow-x: hidden;
+}
+
+/* Background structural grid layout */
+.bg-video-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); 
+    grid-template-rows: repeat(2, 50vh);
+    gap: 0; 
+    z-index: 1;
+    pointer-events: none; 
+    background-color: #000000; 
+}
+
+.bg-video-grid video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.center-video-matrix {
+    grid-column: 3 / 5;
+    grid-row: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 50vh);
+    gap: 0;
+    z-index: 1;
+    opacity: 0.45;
+}
+
+/* Vertical grid tracking lines */
+.vid-top-col1 { grid-column: 1; grid-row: 1; z-index: 2; }
+.vid-top-col2 { grid-column: 2; grid-row: 1; z-index: 2; }
+.vid-top-col5 { grid-column: 5; grid-row: 1; z-index: 2; }
+.vid-top-col6 { grid-column: 6; grid-row: 1; z-index: 2; }
+
+.vid-bot-col1 { grid-column: 1; grid-row: 2; z-index: 2; } 
+.vid-bot-col2 { grid-column: 2; grid-row: 2; z-index: 2; } 
+.vid-bot-col5 { grid-column: 5; grid-row: 2; z-index: 2; } 
+.vid-bot-col6 { grid-column: 6; grid-row: 2; z-index: 2; } 
+
+/* --- FULL PAGE ENVELOPE COVER LAYER --- */
+.envelope-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #d1c4e9; 
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+    cursor: pointer;
+}
+
+.envelope {
+    position: relative;
+    width: 850px; 
+    height: 550px; 
+    background-color: #d1c4e9; 
+    border-radius: 15px;
+    box-shadow: 0 25px 55px rgba(0,0,0,0.15);
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 425px solid transparent;  
+    border-right: 425px solid transparent; 
+    border-top: 290px solid #b39ddb;       
+    border-radius: 15px 15px 0 0;
+    z-index: 2;
+}
+
+.envelope-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;  
+    height: 300px; 
+    object-fit: cover;
+    border-radius: 50%;
+    border: 8px solid #ffffff; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    z-index: 3;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.envelope:hover .envelope-badge {
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.envelope-cover.opened {
+    transform: translateY(-100vh);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* --- FOREGROUND CONTENT LAYER --- */
+.content-wrapper {
+    position: relative;
+    z-index: 2;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s ease 0.5s;
+    background: transparent; 
+}
+
+body.reveal-content .content-wrapper {
+    opacity: 1;
+}
+
+.hero {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 60px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.subtitle {
+    font-size: 24px;
+    margin-bottom: 40px;
+    color: #e1bee7;
+}
+
+/* --- STRICT 2-COLUMN SLIDESHOW GALLERY GRID --- */
+.section {
+    width: 100%;
+    max-width: 950px; 
+    margin-bottom: 80px;
+}
+
+.flip-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 40px;
+    padding: 20px 0;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 900px; 
+    perspective: 2000px; 
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s ease-in-out;
+    transform-style: preserve-3d;
+}
+
+.flip-card.is-flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; 
+    backface-visibility: hidden;
+    border-radius: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    box-sizing: border-box;
+}
+
+.card-front {
+    background: #e6e6fa; 
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.card-back {
+    background: #ffffff;
+    color: #4a3b5c;
+    transform: rotateY(180deg);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid #8e7cc3;
+    overflow-y: auto; 
+}
+
+.card-back p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* --- FLOATING REASONS SPHERES --- */
+.floating-reasons-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; 
+    z-index: 3;
+}
+
+.floating-reason-sphere {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 25%; 
+    width: 336px;  
+    height: 336px; 
+    background: rgba(243, 239, 252, 0.98);
+    color: #4a3b5c;
+    border: 4px solid #b39ddb;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 35px;
+    text-align: center;
+    font-size: 19px; 
+    font-weight: bold;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    transition: transform 0.2s ease-out;
+}
+
+.sphere-1 { left: -2%; margin-top: 400px; }
+.sphere-2 { left: 82%; margin-top: 1100px; }
+.sphere-3 { left: -3%; margin-top: 1800px; }
+.sphere-4 { left: 83%; margin-top: 2500px; }
+
+/* Main Header Message Banner */
+.letter-box {
+    background: #ffffff; 
+    max-width: 600px;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    margin: 0 auto 60px auto;
+}
+
+.letter-text {
+    background: #8e7cc3;
+    color: white;
+    padding: 50px;
+    border-radius: 30px;
+    max-width: 800px;
+    line-height: 2;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+footer {
+    padding: 40px;
+    font-size: 14px;
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Video Structural Layout -->
+<div class="bg-video-grid">
+    
+    <!-- Video 5 Sub-Grid -->
+    <div class="center-video-matrix">
+        <video autoplay loop muted playsinline><source src="video5.mp4" type="video/mp4"><source src="https://drive.google.com/uc?export=download&id=1ftmaNign4SLeQWLURPhsR8ATdhWzaUIr" type="video/mp4"></video>
+        <video autoplay loop muted playsinline><source src="video5.mp4" type="video/mp4"><source src="https://drive.google.com/uc?export=download&id=1ftmaNign4SLeQWLURPhsR8ATdhWzaUIr" type="video/mp4"></video>
+        <video autoplay loop muted playsinline><source src="video5.mp4" type="video/mp4"><source src="https://drive.google.com/uc?export=download&id=1ftmaNign4SLeQWLURPhsR8ATdhWzaUIr" type="video/mp4"></video>
+        <video autoplay loop muted playsinline><source src="video5.mp4" type="video/mp4"><source src="https://drive.google.com/uc?export=download&id=1ftmaNign4SLeQWLURPhsR8ATdhWzaUIr" type="video/mp4"></video>
+    </div>
+
+    <!-- Top Row Video Configuration -->
+    <video autoplay loop muted playsinline class="vid-top-col1"><source src="video1.mp4" type="video/mp4"><source src="https://drive.google.com/uc?export=download&id=1PzFAHymSLDqXCYRZQerEvx1bnZjDBCh5" type="video/mp4"></video>
+    <video autoplay loop muted playsinline class="vid-top-col2"><source src="video2.mp4" type="video/mp4"><source src="https://drive.google.com/uc?export=download&id=1gIN_O7nNE_QAoXJ61qHvhTJ2GNnkGRKi" type="video/mp4"></video>
+    <div></div> 
+    <div></div>
+    <video autoplay loop muted playsinline class="vid-top-col5"><source src="video3.mp4" type="video/mp4"><source src="https://drive.google.com/uc?export=download&id=16TfZZheyJM8SQZ-_buJ9KKqEyzVUg5Nx" type="video/mp4"></video>
+    <video autoplay loop muted playsinline class="vid-top-col6"><source src="video4.mp4" type="video/mp4"><source src="https://drive.google.com/uc?export=download&id=1B4yru6hFCKnpbQ_plddJOLeKW3VRNFNN" type="video/mp4"></video>
+    
+    <!-- Bottom Row Video Configuration (Swapped Sides Layout) -->
+    <video autoplay loop muted playsinline class="vid-bot-col1"><source src="video3.mp4" type="video/mp4"><source src="https://drive.google.com/uc?export=download&id=16TfZZheyJM8SQZ-_buJ9KKqEyzVUg5Nx" type="video/mp4"></video>
+    <video autoplay loop muted playsinline class="vid-bot-col2"><source src="video4.mp4" type="video/mp4"><source src="https://drive.google.com/uc?export=download&id=1B4yru6hFCKnpbQ_plddJOLeKW3VRNFNN" type="video/mp4"></video>
+    <div></div>
+    <div></div>
+    <video autoplay loop muted playsinline class="vid-bot-col5"><source src="video1.mp4" type="video/mp4"><source src="https://drive.google.com/uc?export=download&id=1PzFAHymSLDqXCYRZQerEvx1bnZjDBCh5" type="video/mp4"></video>
+    <video autoplay loop muted playsinline class="vid-bot-col6"><source src="video2.mp4" type="video/mp4"><source src="https://drive.google.com/uc?export=download&id=1gIN_O7nNE_QAoXJ61qHvhTJ2GNnkGRKi" type="video/mp4"></video>
+</div>
+
+<!-- Full Screen Interactive Envelope Cover Layer -->
+<div class="envelope-cover" id="coverLayer" onclick="openEnvelope()">
+    <div class="envelope">
+        <img src="Image%201.jpg" alt="Seal" class="envelope-badge">
+    </div>
+</div>
+
+<!-- Foreground Interactive Content Layer -->
+<div class="content-wrapper">
+
+    <!-- Floating Reasons Spheres Context Track -->
+    <div class="floating-reasons-container">
+        <div class="floating-reason-sphere sphere-1">Your smile makes every bad day disappear.</div>
+        <div class="floating-reason-sphere sphere-2">You always support me.</div>
+        <div class="floating-reason-sphere sphere-3">You make life feel exciting.</div>
+        <div class="floating-reason-sphere sphere-4">Your laugh is addictive.</div>
+    </div>
+
+    <div class="hero">
+        <h1>Happy Birthday Alisha</h1>
+        <p class="subtitle">To the most beautiful girl in my life</p>
+
+        <div class="letter-box">
+            <p style="font-size: 18px; margin: 0; line-height: 1.6; font-weight: bold; color: #4a3b5c;">
+                Thank you for making my life happier, calmer, and more exciting every single day.
+            </p>
+        </div>
+    </div>
+
+    <!-- 22 rows of 2 columns image matrix -->
+    <div class="section">
+        <div class="flip-gallery">
+            
+            <!-- Row 1 -->
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3000">
+                        <img src="Image%201.jpg" class="slide active" alt="M1">
+                        <img src="Image%202.jpg" class="slide" alt="M2">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 1 left here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3200">
+                        <img src="Image%203.jpg" class="slide active" alt="M3">
+                        <img src="Image%204.jpg" class="slide" alt="M4">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 1 right here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3400">
+                        <img src="Image%205.jpg" class="slide active" alt="M5">
+                        <img src="Image%206.jpg" class="slide" alt="M6">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 2 left here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3100">
+                        <img src="Image%207.jpg" class="slide active" alt="M7">
+                        <img src="Image%208.jpg" class="slide" alt="M8">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 2 right here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3300">
+                        <img src="Image%209.jpg" class="slide active" alt="M9">
+                        <img src="Image%2010.jpg" class="slide" alt="M10">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 3 left here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3500">
+                        <img src="Image%2011.jpg" class="slide active" alt="M11">
+                        <img src="Image%2012.jpg" class="slide" alt="M12">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 3 right here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3000">
+                        <img src="Image%2013.jpg" class="slide active" alt="M13">
+                        <img src="Image%2014.jpg" class="slide" alt="M14">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 4 left here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3200">
+                        <img src="Image%2015.jpg" class="slide active" alt="M15">
+                        <img src="Image%2016.jpg" class="slide" alt="M16">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 4 right here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 5 -->
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3400">
+                        <img src="Image%2017.jpg" class="slide active" alt="M17">
+                        <img src="Image%2018.jpg" class="slide" alt="M18">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 5 left here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3100">
+                        <img src="Image%2019.jpg" class="slide active" alt="M19">
+                        <img src="Image%2020.jpg" class="slide" alt="M20">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 5 right here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 6 -->
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3300">
+                        <img src="Image%2021.jpg" class="slide active" alt="M21">
+                        <img src="Image%2022.jpg" class="slide" alt="M22">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 6 left here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3500">
+                        <img src="Image%2023.jpg" class="slide active" alt="M23">
+                        <img src="Image%2024.jpg" class="slide" alt="M24">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 6 right here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 7 -->
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3000">
+                        <img src="Image%2025.jpg" class="slide active" alt="M25">
+                        <img src="Image%2026.jpg" class="slide" alt="M26">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 7 left here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3200">
+                        <img src="Image%2027.jpg" class="slide active" alt="M27">
+                        <img src="Image%2028.jpg" class="slide" alt="M28">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 7 right here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 8 -->
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3400">
+                        <img src="Image%2029.jpg" class="slide active" alt="M29">
+                        <img src="Image%2030.jpg" class="slide" alt="M30">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 8 left here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3100">
+                        <img src="Image%2031.jpg" class="slide active" alt="M31">
+                        <img src="Image%2032.jpg" class="slide" alt="M32">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 8 right here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 9 -->
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3300">
+                        <img src="Image%2033.jpg" class="slide active" alt="M33">
+                        <img src="Image%2034.jpg" class="slide" alt="M34">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 9 left here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3500">
+                        <img src="Image%2035.jpg" class="slide active" alt="M35">
+                        <img src="Image%2036.jpg" class="slide" alt="M36">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 9 right here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 10 -->
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3000">
+                        <img src="Image%2037.jpg" class="slide active" alt="M37">
+                        <img src="Image%2038.jpg" class="slide" alt="M38">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 10 left here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3200">
+                        <img src="Image%2039.jpg" class="slide active" alt="M39">
+                        <img src="Image%2040.jpg" class="slide" alt="M40">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 10 right here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 11 -->
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3400">
+                        <img src="Image%2041.jpg" class="slide active" alt="M41">
+                        <img src="Image%2042.jpg" class="slide" alt="M42">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 11 left here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="toggleCard(this)">
+                <div class="flip-card-inner">
+                    <div class="card-front" data-speed="3100">
+                        <img src="Image%2043.jpg" class="slide active" alt="M43">
+                        <img src="Image%2044.jpg" class="slide" alt="M44">
+                    </div>
+                    <div class="card-back">
+                        <p>Insert message for Row 11 right here...</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="section" style="max-width: 800px;">
+        <div class="letter-text">
+            <h2>A Letter For You</h2>
+            <p>
+                Happy birthday my love.<br><br>
+                I hope this year gives you happiness, success, peace, and unforgettable memories.<br><br>
+                Thank you for always being there for me and making life feel special.<br><br>
+                I love you endlessly.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        Made by Your Boyfriend
+    </footer>
+
+</div>
+
+<!-- Interactive Engine Logic -->
+<script>
+function openEnvelope() {
+    document.getElementById('coverLayer').classList.add('opened');
+    document.body.classList.add('reveal-content');
+}
+
+let slideIntervals = [];
+document.querySelectorAll('.card-front').forEach((front, index) => {
+    const slides = front.querySelectorAll('.slide');
+    if (slides.length <= 1) return; 
+
+    const delay = parseInt(front.getAttribute('data-speed')) || 3000;
+    let currentSlideIndex = 0;
+
+    const intervalId = setInterval(() => {
+        const parentCard = front.closest('.flip-card');
+        if (parentCard && !parentCard.classList.contains('is-flipped')) {
+            slides[currentSlideIndex].classList.remove('active');
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            slides[currentSlideIndex].classList.add('active');
+        }
+    }, delay);
+
+    front.setAttribute('data-interval-idx', slideIntervals.length);
+    slideIntervals.push(intervalId);
+});
+
+function toggleCard(card) {
+    card.classList.toggle('is-flipped');
+}
+</script>
+
+</body>
+</html>
