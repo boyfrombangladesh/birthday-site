@@ -34,12 +34,11 @@ html, body {
     background-color: #000000; 
 }
 
-/* Make iframes cover the grid squares exactly like the videos did */
+/* Force iframes to behave natively */
 .bg-video-grid iframe {
     width: 100%;
     height: 100%;
     border: none;
-    object-fit: cover;
     pointer-events: none;
 }
 
@@ -319,32 +318,32 @@ footer {
 
 <body>
 
-<!-- Background Video Structural Layout using Fixed YouTube Embed IDs -->
+<!-- Background Video Structural Layout -->
 <div class="bg-video-grid">
     
     <!-- Video 5 Matrix (Center Backdrop) -->
     <div class="center-video-matrix">
-        <iframe src="https://www.youtube.com/embed/TJO8cbkP6sw?autoplay=1&mute=1&loop=1&controls=0&playlist=TJO8cbkP6sw&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
-        <iframe src="https://www.youtube.com/embed/TJO8cbkP6sw?autoplay=1&mute=1&loop=1&controls=0&playlist=TJO8cbkP6sw&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
-        <iframe src="https://www.youtube.com/embed/TJO8cbkP6sw?autoplay=1&mute=1&loop=1&controls=0&playlist=TJO8cbkP6sw&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
-        <iframe src="https://www.youtube.com/embed/TJO8cbkP6sw?autoplay=1&mute=1&loop=1&controls=0&playlist=TJO8cbkP6sw&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
+        <iframe src="https://www.youtube.com/embed/TJO8cbkP6sw?autoplay=1&mute=1&loop=1&controls=0&playlist=TJO8cbkP6sw" allow="autoplay"></iframe>
+        <iframe src="https://www.youtube.com/embed/TJO8cbkP6sw?autoplay=1&mute=1&loop=1&controls=0&playlist=TJO8cbkP6sw" allow="autoplay"></iframe>
+        <iframe src="https://www.youtube.com/embed/TJO8cbkP6sw?autoplay=1&mute=1&loop=1&controls=0&playlist=TJO8cbkP6sw" allow="autoplay"></iframe>
+        <iframe src="https://www.youtube.com/embed/TJO8cbkP6sw?autoplay=1&mute=1&loop=1&controls=0&playlist=TJO8cbkP6sw" allow="autoplay"></iframe>
     </div>
 
     <!-- Top Row Side Videos -->
-    <iframe class="vid-top-col1" src="https://www.youtube.com/embed/M3OhqHPs4vg?autoplay=1&mute=1&loop=1&controls=0&playlist=M3OhqHPs4vg&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
-    <iframe class="vid-top-col2" src="https://www.youtube.com/embed/9QpzfY2a7J8?autoplay=1&mute=1&loop=1&controls=0&playlist=9QpzfY2a7J8&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
+    <iframe class="vid-top-col1" src="https://www.youtube.com/embed/M3OhqHPs4vg?autoplay=1&mute=1&loop=1&controls=0&playlist=M3OhqHPs4vg" allow="autoplay"></iframe>
+    <iframe class="vid-top-col2" src="https://www.youtube.com/embed/9QpzfY2a7J8?autoplay=1&mute=1&loop=1&controls=0&playlist=9QpzfY2a7J8" allow="autoplay"></iframe>
     <div></div> 
     <div></div>
-    <iframe class="vid-top-col5" src="https://www.youtube.com/embed/5RtTRbVq7z0?autoplay=1&mute=1&loop=1&controls=0&playlist=5RtTRbVq7z0&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
-    <iframe class="vid-top-col6" src="https://www.youtube.com/embed/Ccxapby-G7Q?autoplay=1&mute=1&loop=1&controls=0&playlist=Ccxapby-G7Q&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
+    <iframe class="vid-top-col5" src="https://www.youtube.com/embed/5RtTRbVq7z0?autoplay=1&mute=1&loop=1&controls=0&playlist=5RtTRbVq7z0" allow="autoplay"></iframe>
+    <iframe class="vid-top-col6" src="https://www.youtube.com/embed/Ccxapby-G7Q?autoplay=1&mute=1&loop=1&controls=0&playlist=Ccxapby-G7Q" allow="autoplay"></iframe>
     
     <!-- Bottom Row Side Videos -->
-    <iframe class="vid-bot-col1" src="https://www.youtube.com/embed/5RtTRbVq7z0?autoplay=1&mute=1&loop=1&controls=0&playlist=5RtTRbVq7z0&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
-    <iframe class="vid-bot-col2" src="https://www.youtube.com/embed/Ccxapby-G7Q?autoplay=1&mute=1&loop=1&controls=0&playlist=Ccxapby-G7Q&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
+    <iframe class="vid-bot-col1" src="https://www.youtube.com/embed/5RtTRbVq7z0?autoplay=1&mute=1&loop=1&controls=0&playlist=5RtTRbVq7z0" allow="autoplay"></iframe>
+    <iframe class="vid-bot-col2" src="https://www.youtube.com/embed/Ccxapby-G7Q?autoplay=1&mute=1&loop=1&controls=0&playlist=Ccxapby-G7Q" allow="autoplay"></iframe>
     <div></div>
     <div></div>
-    <iframe class="vid-bot-col5" src="https://www.youtube.com/embed/M3OhqHPs4vg?autoplay=1&mute=1&loop=1&controls=0&playlist=M3OhqHPs4vg&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
-    <iframe class="vid-bot-col6" src="https://www.youtube.com/embed/9QpzfY2a7J8?autoplay=1&mute=1&loop=1&controls=0&playlist=9QpzfY2a7J8&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
+    <iframe class="vid-bot-col5" src="https://www.youtube.com/embed/M3OhqHPs4vg?autoplay=1&mute=1&loop=1&controls=0&playlist=M3OhqHPs4vg" allow="autoplay"></iframe>
+    <iframe class="vid-bot-col6" src="https://www.youtube.com/embed/9QpzfY2a7J8?autoplay=1&mute=1&loop=1&controls=0&playlist=9QpzfY2a7J8" allow="autoplay"></iframe>
 </div>
 
 <!-- Full Screen Interactive Envelope Cover Layer -->
