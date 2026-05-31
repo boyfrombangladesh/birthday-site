@@ -34,10 +34,13 @@ html, body {
     background-color: #000000; 
 }
 
-.bg-video-grid video {
+/* Make iframes cover the grid squares exactly like the videos did */
+.bg-video-grid iframe {
     width: 100%;
     height: 100%;
+    border: none;
     object-fit: cover;
+    pointer-events: none;
 }
 
 .center-video-matrix {
@@ -316,38 +319,45 @@ footer {
 
 <body>
 
+<!-- Background Video Structural Layout using Fixed YouTube Embed IDs -->
 <div class="bg-video-grid">
     
+    <!-- Video 5 Matrix (Center Backdrop) -->
     <div class="center-video-matrix">
-        <video autoplay loop muted playsinline preload="metadata"><source src="https://github.com/boyfrombangladesh/birthday-site/releases/download/v1.0/video5_ljuekBtT.mp4" type="video/mp4"></video>
-        <video autoplay loop muted playsinline preload="metadata"><source src="https://github.com/boyfrombangladesh/birthday-site/releases/download/v1.0/video5_ljuekBtT.mp4" type="video/mp4"></video>
-        <video autoplay loop muted playsinline preload="metadata"><source src="https://github.com/boyfrombangladesh/birthday-site/releases/download/v1.0/video5_ljuekBtT.mp4" type="video/mp4"></video>
-        <video autoplay loop muted playsinline preload="metadata"><source src="https://github.com/boyfrombangladesh/birthday-site/releases/download/v1.0/video5_ljuekBtT.mp4" type="video/mp4"></video>
+        <iframe src="https://www.youtube.com/embed/TJO8cbkP6sw?autoplay=1&mute=1&loop=1&controls=0&playlist=TJO8cbkP6sw&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
+        <iframe src="https://www.youtube.com/embed/TJO8cbkP6sw?autoplay=1&mute=1&loop=1&controls=0&playlist=TJO8cbkP6sw&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
+        <iframe src="https://www.youtube.com/embed/TJO8cbkP6sw?autoplay=1&mute=1&loop=1&controls=0&playlist=TJO8cbkP6sw&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
+        <iframe src="https://www.youtube.com/embed/TJO8cbkP6sw?autoplay=1&mute=1&loop=1&controls=0&playlist=TJO8cbkP6sw&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
     </div>
 
-    <video autoplay loop muted playsinline preload="metadata" class="vid-top-col1"><source src="https://github.com/boyfrombangladesh/birthday-site/releases/download/v1.0/video1_lvMWucxK.mp4" type="video/mp4"></video>
-    <video autoplay loop muted playsinline preload="metadata" class="vid-top-col2"><source src="https://github.com/boyfrombangladesh/birthday-site/releases/download/v1.0/video2_0sSLPwWk.mp4" type="video/mp4"></video>
+    <!-- Top Row Side Videos -->
+    <iframe class="vid-top-col1" src="https://www.youtube.com/embed/M3OhqHPs4vg?autoplay=1&mute=1&loop=1&controls=0&playlist=M3OhqHPs4vg&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
+    <iframe class="vid-top-col2" src="https://www.youtube.com/embed/9QpzfY2a7J8?autoplay=1&mute=1&loop=1&controls=0&playlist=9QpzfY2a7J8&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
     <div></div> 
     <div></div>
-    <video autoplay loop muted playsinline preload="metadata" class="vid-top-col5"><source src="https://github.com/boyfrombangladesh/birthday-site/releases/download/v1.0/video3_rS8xNpWq.mp4" type="video/mp4"></video>
-    <video autoplay loop muted playsinline preload="metadata" class="vid-top-col6"><source src="https://github.com/boyfrombangladesh/birthday-site/releases/download/v1.0/video4_b9FreHfy.mp4" type="video/mp4"></video>
+    <iframe class="vid-top-col5" src="https://www.youtube.com/embed/5RtTRbVq7z0?autoplay=1&mute=1&loop=1&controls=0&playlist=5RtTRbVq7z0&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
+    <iframe class="vid-top-col6" src="https://www.youtube.com/embed/Ccxapby-G7Q?autoplay=1&mute=1&loop=1&controls=0&playlist=Ccxapby-G7Q&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
     
-    <video autoplay loop muted playsinline preload="metadata" class="vid-bot-col1"><source src="https://github.com/boyfrombangladesh/birthday-site/releases/download/v1.0/video3_rS8xNpWq.mp4" type="video/mp4"></video>
-    <video autoplay loop muted playsinline preload="metadata" class="vid-bot-col2"><source src="https://github.com/boyfrombangladesh/birthday-site/releases/download/v1.0/video4_b9FreHfy.mp4" type="video/mp4"></video>
+    <!-- Bottom Row Side Videos -->
+    <iframe class="vid-bot-col1" src="https://www.youtube.com/embed/5RtTRbVq7z0?autoplay=1&mute=1&loop=1&controls=0&playlist=5RtTRbVq7z0&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
+    <iframe class="vid-bot-col2" src="https://www.youtube.com/embed/Ccxapby-G7Q?autoplay=1&mute=1&loop=1&controls=0&playlist=Ccxapby-G7Q&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
     <div></div>
     <div></div>
-    <video autoplay loop muted playsinline preload="metadata" class="vid-bot-col5"><source src="https://github.com/boyfrombangladesh/birthday-site/releases/download/v1.0/video1_lvMWucxK.mp4" type="video/mp4"></video>
-    <video autoplay loop muted playsinline preload="metadata" class="vid-bot-col6"><source src="https://github.com/boyfrombangladesh/birthday-site/releases/download/v1.0/video2_0sSLPwWk.mp4" type="video/mp4"></video>
+    <iframe class="vid-bot-col5" src="https://www.youtube.com/embed/M3OhqHPs4vg?autoplay=1&mute=1&loop=1&controls=0&playlist=M3OhqHPs4vg&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
+    <iframe class="vid-bot-col6" src="https://www.youtube.com/embed/9QpzfY2a7J8?autoplay=1&mute=1&loop=1&controls=0&playlist=9QpzfY2a7J8&showinfo=0&rel=0&iv_load_policy=3" allow="autoplay"></iframe>
 </div>
 
+<!-- Full Screen Interactive Envelope Cover Layer -->
 <div class="envelope-cover" id="coverLayer" onclick="openEnvelope()">
     <div class="envelope">
         <img src="Image%201.jpg" alt="Seal" class="envelope-badge">
     </div>
 </div>
 
+<!-- Foreground Interactive Content Layer -->
 <div class="content-wrapper">
 
+    <!-- Floating Reasons Spheres Context Track -->
     <div class="floating-reasons-container">
         <div class="floating-reason-sphere sphere-1">Your smile makes every bad day disappear.</div>
         <div class="floating-reason-sphere sphere-2">You always support me.</div>
@@ -366,9 +376,11 @@ footer {
         </div>
     </div>
 
+    <!-- 22 rows of 2 columns image matrix -->
     <div class="section">
         <div class="flip-gallery">
             
+            <!-- Row 1 -->
             <div class="flip-card" onclick="toggleCard(this)">
                 <div class="flip-card-inner">
                     <div class="card-front" data-speed="3000">
@@ -393,6 +405,7 @@ footer {
                 </div>
             </div>
 
+            <!-- Row 2 -->
             <div class="flip-card" onclick="toggleCard(this)">
                 <div class="flip-card-inner">
                     <div class="card-front" data-speed="3400">
@@ -417,6 +430,7 @@ footer {
                 </div>
             </div>
 
+            <!-- Row 3 -->
             <div class="flip-card" onclick="toggleCard(this)">
                 <div class="flip-card-inner">
                     <div class="card-front" data-speed="3300">
@@ -441,6 +455,7 @@ footer {
                 </div>
             </div>
 
+            <!-- Row 4 -->
             <div class="flip-card" onclick="toggleCard(this)">
                 <div class="flip-card-inner">
                     <div class="card-front" data-speed="3000">
@@ -465,6 +480,7 @@ footer {
                 </div>
             </div>
 
+            <!-- Row 5 -->
             <div class="flip-card" onclick="toggleCard(this)">
                 <div class="flip-card-inner">
                     <div class="card-front" data-speed="3400">
@@ -489,6 +505,7 @@ footer {
                 </div>
             </div>
 
+            <!-- Row 6 -->
             <div class="flip-card" onclick="toggleCard(this)">
                 <div class="flip-card-inner">
                     <div class="card-front" data-speed="3300">
@@ -513,6 +530,7 @@ footer {
                 </div>
             </div>
 
+            <!-- Row 7 -->
             <div class="flip-card" onclick="toggleCard(this)">
                 <div class="flip-card-inner">
                     <div class="card-front" data-speed="3000">
@@ -537,6 +555,7 @@ footer {
                 </div>
             </div>
 
+            <!-- Row 8 -->
             <div class="flip-card" onclick="toggleCard(this)">
                 <div class="flip-card-inner">
                     <div class="card-front" data-speed="3400">
@@ -561,6 +580,7 @@ footer {
                 </div>
             </div>
 
+            <!-- Row 9 -->
             <div class="flip-card" onclick="toggleCard(this)">
                 <div class="flip-card-inner">
                     <div class="card-front" data-speed="3300">
@@ -585,6 +605,7 @@ footer {
                 </div>
             </div>
 
+            <!-- Row 10 -->
             <div class="flip-card" onclick="toggleCard(this)">
                 <div class="flip-card-inner">
                     <div class="card-front" data-speed="3000">
@@ -609,6 +630,7 @@ footer {
                 </div>
             </div>
 
+            <!-- Row 11 -->
             <div class="flip-card" onclick="toggleCard(this)">
                 <div class="flip-card-inner">
                     <div class="card-front" data-speed="3400">
@@ -654,6 +676,7 @@ footer {
 
 </div>
 
+<!-- Interactive Engine Logic -->
 <script>
 function openEnvelope() {
     document.getElementById('coverLayer').classList.add('opened');
